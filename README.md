@@ -1,10 +1,16 @@
 # Delta Mavericks
 
- ``` One Paragraph of project description goes here ```
+ ```
+ An application that allows Jasmine to be tracked by RFID through bracelet, Facial Recognition, and NFC by tablet while traveling from guardian to guardian. The bracelet and tablet will send out checkpoint notifications through SMS or FlyDelta application. The bracelet used will allow Jasmine to pick up a prepaid meal, a tablet with preloaded content for entertainment, headphones, and a small care package created by parents online.
+
+ This technology could be adapted for other Special Request travelers, such as ADA, and Senior Citizens.
+ ```
 
 ### Getting Started
 
-``` These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. ```
+```
+To get started on this project, follow the installations instructions below.
+```
 
 
 
