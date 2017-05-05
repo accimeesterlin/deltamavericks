@@ -1,7 +1,10 @@
 # Delta Mavericks
 
  ```
- An application that allows Jasmine to be tracked by RFID through bracelet, Facial Recognition, and NFC by tablet while traveling from guardian to guardian. The bracelet and tablet will send out checkpoint notifications through SMS or FlyDelta application. The bracelet used will allow Jasmine to pick up a prepaid meal, a tablet with preloaded content for entertainment, headphones, and a small care package created by parents online.
+ An application that allows Jasmine to be tracked by RFID through bracelet, Facial Recognition, and NFC by tablet
+ while traveling from guardian to guardian. The bracelet and tablet will send out checkpoint notifications through
+ SMS or FlyDelta application. The bracelet used will allow Jasmine to pick up a prepaid meal, a tablet with preloaded
+ content for entertainment, headphones, and a small care package created by parents online.
 
  This technology could be adapted for other Special Request travelers, such as ADA, and Senior Citizens.
  ```
@@ -33,7 +36,8 @@ The above command will install all the dependencies you need
 > npm install -g nodemon
 
 The above command will install nodemon globally for you
-nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.
+nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will
+automatically restart your node application.
 
 ###### Step 3
 >  nodemon server.js
