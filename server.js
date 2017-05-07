@@ -18,6 +18,11 @@ app.engine("handlebars", handlebars({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 var routes = require("./controllers/kidsControllers");
+var db = require("./models");
 
 app.use("/", routes);
-app.listen(port);
+db.sequelize.sync({}).then(function () {
+    app.listen(port, function () {
+        console.log("App is listening on PORT " + port);
+    });
+});
