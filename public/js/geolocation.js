@@ -22,4 +22,5 @@ var app = {
 };
 
 
+
 app.getLocation();
