@@ -19,5 +19,9 @@
     "database": "d5jvdfnfh5jewgv8",
     "host": "vvfv20el7sb2enn3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
+  },
+  "engine":{
+    "node":"6.10.0",
+    "npm":"3.10.10"
   }
 }
