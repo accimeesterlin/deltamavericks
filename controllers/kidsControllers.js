@@ -3,7 +3,8 @@
  */
 
 
-var express = require("express");
+var express = require("express"),
+    passport = require("passport");
 
 var router = express.Router();
 
@@ -48,6 +49,19 @@ router.get("/profile", function (req, res) {
 router.get("/api/beacons", function (req, res) {
     res.json(data);
 });
+
+// All Posts go here
+router.post('/signup', passport.authenticate("local-signup", {
+    successRedirect: '/profile',
+    failureRedirect: '/signup'
+
+}));
+
+router.post('/signin', passport.authenticate("local-sign", {
+    successRedirect: '/profile',
+    failureRedirect: '/signup'
+
+}));
 
 
 module.exports = router;
