@@ -18,9 +18,16 @@ var app = {
         } else {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
+    },
+    beacons: function () {
+        $.ajax({url: "/api/beacons", method:"GET"})
+            .done(function (data) {
+                console.log(data);
+            });
     }
 };
 
 
 
 app.getLocation();
+app.beacons();
