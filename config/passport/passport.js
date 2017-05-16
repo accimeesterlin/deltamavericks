@@ -1,45 +1,47 @@
-/**
- * Created by esterlingaccime on 5/12/17.
- */
 // Used to secure passwords
 var bCrypt = require('bcrypt-nodejs');
 
+
+
 module.exports = function(passport, user) {
-    var User = user.user;
-
     var LocalStrategy = require('passport-local').Strategy;
+    var Recruiter = user.recruiter;
 
-    //serialize
-    passport.serializeUser(function (user, done) {
-        done(null, user.id);
-    });
-
-    // deserialize user
-    passport.deserializeUser(function (id, done) {
-        Recruiter.findById(id).then(function (user) {
-            if (user) {
-                done(null, user.get());
-            } else {
-                done(user.errors, null);
-            }
+    var recruiterSerialize = function() {
+        //serialize
+        passport.serializeUser(function(user, done) {
+            done(null, user.id);
         });
-    });
+
+        // deserialize user
+        passport.deserializeUser(function(id, done) {
+            Recruiter.findById(id).then(function(user) {
+                if (user) {
+                    done(null, user.get());
+                } else {
+                    done(user.errors, null);
+                }
+            });
+        });
+    };
 
 
-////////////////////////////////////////////////////////////////////
-///////////////////Recruiter Access Below///////////////////////////
-////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
+    ///////////////////Recruiter Access Below///////////////////////////
+    ////////////////////////////////////////////////////////////////////
     // Sign Up Recruiter
-    passport.use('local-signup', new LocalStrategy(
-        {
+    passport.use('recruiter-signup', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
 
-        function (req, email, password, done) {
+        function(req, email, password, done) {
+            //serialize
+            recruiterSerialize();
+
             // Creating long string password for users
-            var generateHash = function (password) {
+            var generateHash = function(password) {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
 
@@ -47,7 +49,7 @@ module.exports = function(passport, user) {
                 where: {
                     email: email
                 }
-            }).then(function (user) {
+            }).then(function(user) {
                 if (user) {
                     return done(null, false, {
                         message: 'That email is already taken'
@@ -66,7 +68,7 @@ module.exports = function(passport, user) {
                     console.log(recruiter);
 
 
-                    Recruiter.create(recruiter).then(function (newUser, created) {
+                    Recruiter.create(recruiter).then(function(newUser, created) {
                         if (!newUser) {
                             return done(null, false);
                         }
@@ -75,21 +77,25 @@ module.exports = function(passport, user) {
                         }
                     });
                 }
+            }).catch(function(err) {
+                console.log("Errors: " + err);
+                return done(null, false, { message: 'Something went wrong with your Sign Up' });
             });
         }
     ));
-    //LOCAL SIGNIN
-    passport.use('local-signin', new LocalStrategy(
-        {
+
+    // Recruiter Sign in
+    passport.use('recruiter-signin', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
 
-        function (req, email, password, done) {
+        function(req, email, password, done) {
+            recruiterSerialize();
             // Generating long string password
-            var isValidPassword = function (userpass, password) {
+            var isValidPassword = function(userpass, password) {
                 return bCrypt.compareSync(password, userpass);
             };
 
@@ -97,15 +103,15 @@ module.exports = function(passport, user) {
                 where: {
                     email: email
                 }
-            }).then(function (user) {
+            }).then(function(user) {
 
                 if (!user) {
-                    return done(null, false, {message: 'Email does not exist'});
+                    return done(null, false, { message: 'Email does not exist' });
                 }
 
                 if (!isValidPassword(user.password, password)) {
 
-                    return done(null, false, {message: 'Incorrect password.'});
+                    return done(null, false, { message: 'Incorrect password.' });
 
                 }
 
@@ -113,12 +119,15 @@ module.exports = function(passport, user) {
 
                 return done(null, userinfo);
 
-            }).catch(function (err) {
+            }).catch(function(err) {
 
                 console.log("Error:", err);
 
-                //return done(null, false, { message: 'Something went wrong with your Signin' });
+                return done(null, false, { message: 'Something went wrong with your Signin' });
             });
         }
     )); // Sigin Recruiter
+
+
+
 };
