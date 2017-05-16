@@ -5,9 +5,9 @@ var bCrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport, user) {
     var LocalStrategy = require('passport-local').Strategy;
-    var Recruiter = user.recruiter;
+    var Parent = user.user;
 
-    var recruiterSerialize = function() {
+    var parentSerialize = function() {
         //serialize
         passport.serializeUser(function(user, done) {
             done(null, user.id);
@@ -15,7 +15,7 @@ module.exports = function(passport, user) {
 
         // deserialize user
         passport.deserializeUser(function(id, done) {
-            Recruiter.findById(id).then(function(user) {
+            Parent.findById(id).then(function(user) {
                 if (user) {
                     done(null, user.get());
                 } else {
@@ -30,7 +30,7 @@ module.exports = function(passport, user) {
     ///////////////////Recruiter Access Below///////////////////////////
     ////////////////////////////////////////////////////////////////////
     // Sign Up Recruiter
-    passport.use('recruiter-signup', new LocalStrategy({
+    passport.use('signup', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
@@ -38,14 +38,14 @@ module.exports = function(passport, user) {
 
         function(req, email, password, done) {
             //serialize
-            recruiterSerialize();
+            parentSerialize();
 
             // Creating long string password for users
             var generateHash = function(password) {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
 
-            Recruiter.findOne({
+            Parent.findOne({
                 where: {
                     email: email
                 }
@@ -58,17 +58,17 @@ module.exports = function(passport, user) {
                 } else {
                     var userPassword = generateHash(password);
 
-                    var recruiter = {
+                    var parent = {
                         email: email,
                         password: userPassword,
                         firstname: req.body.firstname,
                         lastname: req.body.lastname
                     };
 
-                    console.log(recruiter);
+                    console.log(parent);
 
 
-                    Recruiter.create(recruiter).then(function(newUser, created) {
+                    Parent.create(parent).then(function(newUser, created) {
                         if (!newUser) {
                             return done(null, false);
                         }
@@ -85,7 +85,7 @@ module.exports = function(passport, user) {
     ));
 
     // Recruiter Sign in
-    passport.use('recruiter-signin', new LocalStrategy({
+    passport.use('signin', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
             usernameField: 'email',
             passwordField: 'password',
@@ -93,13 +93,13 @@ module.exports = function(passport, user) {
         },
 
         function(req, email, password, done) {
-            recruiterSerialize();
+            parentSerialize();
             // Generating long string password
             var isValidPassword = function(userpass, password) {
                 return bCrypt.compareSync(password, userpass);
             };
 
-            Recruiter.findOne({
+            Parent.findOne({
                 where: {
                     email: email
                 }

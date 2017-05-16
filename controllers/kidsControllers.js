@@ -51,15 +51,15 @@ router.get("/api/beacons", function (req, res) {
 });
 
 // All Posts go here
-router.post('/signup', passport.authenticate("local-signup", {
+router.post('/signup', passport.authenticate("signup", {
     successRedirect: '/profile',
-    failureRedirect: '/signup'
+    failureRedirect: '/'
 
 }));
 
-router.post('/signin', passport.authenticate("local-sign", {
+router.post('/signin', passport.authenticate("signin", {
     successRedirect: '/profile',
-    failureRedirect: '/signup'
+    failureRedirect: '/'
 
 }));
 
