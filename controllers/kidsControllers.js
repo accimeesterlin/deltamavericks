@@ -42,12 +42,36 @@ router.get("/", function (req, res) {
     res.render("index");
 });
 
-router.get("/profile", function (req, res) {
+var isLoggedIn = function(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    console.log(req.isAuthenticated());
+    res.redirect("/");
+};
+
+router.get("/profile", isLoggedIn, function (req, res) {
     res.render("profile");
 });
 
 router.get("/api/beacons", function (req, res) {
     res.json(data);
+});
+
+// Log the user out
+// If user not logged in, they're not able to see it
+router.get("/logout", isLoggedIn, function(req, res) {
+    req.session.destroy(function(err) {
+        res.redirect("/index");
+    });
+});
+
+// Log the user out
+// If user not logged in, they're not able to see it
+router.get("/logout", isLoggedIn, function(req, res) {
+    req.session.destroy(function(err) {
+        res.redirect("/index");
+    });
 });
 
 // All Posts go here

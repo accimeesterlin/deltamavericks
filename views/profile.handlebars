@@ -774,9 +774,22 @@
         var updateInfo = function () {
             var newDate = new Date();
 
-            setTimeout(function () {
-                createDivUpdates(" Your child has made it to Security Checkpoint", " " + newDate);
-            }, 60000);
+            var message = function (msg, date, time) {
+                setTimeout(function () {
+                    createDivUpdates(msg, date);
+
+                }, time);
+            };
+
+            message("<strong> Check-In: </strong>" + "Jasmine has checked in to Delta", " " + newDate, 5000);
+            message("<strong> Delta Sky Club: </strong>" + "Jasmine has entered Delta Sky Club", " " + newDate, 10000);
+            message("<strong> Delta Sky Club: </strong>" + "Jasmine has exited Delta Sky Club", " " + newDate, 15000);
+            message("<strong> Terminal A Gate 2 : </strong>" + "Flight 1775MH is boarding", " " + newDate, 20000);
+            message("<strong> Terminal A Gate 2: </strong>" + "Flight 1775MH has taken off for NYC", " " + newDate, 25000);
+            message("<strong> Terminal D Gate 5: </strong>" + "Flight 1175MH has landed at LaGuardia", " " + newDate, 30000);
+            message("<strong> Baggage: </strong>" + "Bags belonging to Jasmine McCoy have arrived at LGA", " " + newDate, 35000);
+            message("<strong> Pick-Up: </strong>" + "Linda Mills --Grandmother has received Jasmine M.", " " + newDate, 40000);
+
 
 //            setTimeout(function () {
 //                createDivUpdates(" Your child has made it to the Boarding Zone", " " + newDate);
