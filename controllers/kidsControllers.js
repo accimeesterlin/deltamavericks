@@ -62,7 +62,7 @@ router.get("/api/beacons", function (req, res) {
 // If user not logged in, they're not able to see it
 router.get("/logout", isLoggedIn, function(req, res) {
     req.session.destroy(function(err) {
-        res.redirect("/index");
+        res.redirect("/");
     });
 });
 

@@ -33,7 +33,7 @@ var db = require("./models");
 require('./config/passport/passport.js')(passport, db); // recruiter table
 
 app.use("/", routes);
-db.sequelize.sync({ force: true}).then(function () {
+db.sequelize.sync({ }).then(function () {
     app.listen(port, function () {
         console.log("App is listening on PORT " + port);
     });
