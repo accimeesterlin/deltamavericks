@@ -39,7 +39,7 @@
                 <span class="bottom"></span>
               </div>
                 <a href="profile.handlebars" class="navbar-brand">
-                 <b>Delta</b>
+                    <img src="./img/logo.png" alt="" class="logo-img">
                 </a>
 
 
@@ -672,94 +672,10 @@
                     showTooltips: true
                 });
 
-                var ctx2 = $(".line-chart")[0].getContext("2d");
-                window.myLine = new Chart(ctx2).Line(lineChartData, {
-                     responsive: true,
-                        showTooltips: true,
-                        multiTooltipTemplate: "<%= value %>",
-                     maintainAspectRatio: false
-                });
-
-                var ctx3 = $(".bar-chart")[0].getContext("2d");
-                window.myLine = new Chart(ctx3).Bar(barChartData, {
-                     responsive: true,
-                        showTooltips: true
-                });
-
-                var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
-                window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
-                    responsive : true,
-                    showTooltips: true
-                });
-
             };
 
         //  end:  Chart =============
 
-        // start: Calendar =========
-         $('.dashboard .calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            defaultDate: '2015-02-12',
-            businessHours: true, // display business hours
-            editable: true,
-            events: [
-                {
-                    title: 'Business Lunch',
-                    start: '2015-02-03T13:00:00',
-                    constraint: 'businessHours'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2015-02-13T11:00:00',
-                    constraint: 'availableForMeeting', // defined below
-                    color: '#20C572'
-                },
-                {
-                    title: 'Conference',
-                    start: '2015-02-18',
-                    end: '2015-02-20'
-                },
-                {
-                    title: 'Party',
-                    start: '2015-02-29T20:00:00'
-                },
-
-                // areas where "Meeting" must be dropped
-                {
-                    id: 'availableForMeeting',
-                    start: '2015-02-11T10:00:00',
-                    end: '2015-02-11T16:00:00',
-                    rendering: 'background'
-                },
-                {
-                    id: 'availableForMeeting',
-                    start: '2015-02-13T10:00:00',
-                    end: '2015-02-13T16:00:00',
-                    rendering: 'background'
-                },
-
-                // red areas where no events can be dropped
-                {
-                    start: '2015-02-24',
-                    end: '2015-02-28',
-                    overlap: false,
-                    rendering: 'background',
-                    color: '#FF6656'
-                },
-                {
-                    start: '2015-02-06',
-                    end: '2015-02-08',
-                    overlap: true,
-                    rendering: 'background',
-                    color: '#FF6656'
-                }
-            ]
-        });
-        // end : Calendar==========
 
           var createDivUpdates = function (msg, today) {
               var container = $("<div>");
