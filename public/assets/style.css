@@ -7,22 +7,23 @@ html {
 }
 
 body {
-  background: #c1bdba;
+  /*background: #c1bdba;*/
   font-family: 'Titillium Web', sans-serif;
 }
 
 a {
   text-decoration: none;
-  color: #1ab188;
+  color: #03a9f4;
   -webkit-transition: .5s ease;
   transition: .5s ease;
 }
 a:hover {
-  color: #179b77;
+  color: #03a9f4;
+
 }
 
 .form {
-  background: rgba(19, 35, 47, 0.9);
+  background: #0c66ae;
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
@@ -55,11 +56,11 @@ a:hover {
   transition: .5s ease;
 }
 .tab-group li a:hover {
-  background: #179b77;
+  background: #03a9f4;
   color: #ffffff;
 }
 .tab-group .active a {
-  background: #1ab188;
+  background: #03a9f4;
   color: #ffffff;
 }
 
@@ -88,7 +89,7 @@ label {
 }
 label .req {
   margin: 2px;
-  color: #1ab188;
+  color: #03a9f4;
 }
 
 label.active {
@@ -121,7 +122,7 @@ input, textarea {
 }
 input:focus, textarea:focus {
   outline: 0;
-  border-color: #1ab188;
+  border-color: #03a9f4;
 }
 
 textarea {
@@ -157,14 +158,14 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #1ab188;
+  background: #03a9f4;
   color: #ffffff;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
 }
 .button:hover, .button:focus {
-  background: #179b77;
+  background: #03a9f4;
 }
 
 .button-block {
@@ -175,4 +176,13 @@ textarea {
 .forgot {
   margin-top: -20px;
   text-align: right;
+}
+
+.logo-img{
+  width:100px;
+  height:100px;
+  -webkit-border-radius:50%;
+  -moz-border-radius:50%;
+  border-radius:50%;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5)
 }
