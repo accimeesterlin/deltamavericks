@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
+
 	<meta charset="utf-8">
 	<meta name="description" content="Miminium Admin Template v.1">
 	<meta name="author" content="Isna Nur Azis">
 	<meta name="keyword" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Miminium</title>
- 
+
     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
 
@@ -68,7 +68,7 @@
       <!-- end: Header -->
 
       <div class="container-fluid mimin-wrapper">
-  
+
           <!-- start:Left Menu -->
             <div id="left-menu">
               <div class="sub-left-menu scroll">
@@ -79,7 +79,7 @@
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
                     <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Dashboard 
+                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Dashboard
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                     </li>
@@ -108,7 +108,7 @@
             </div>
           <!-- end: Left Menu -->
 
-  		
+
           <!-- start: content -->
             <div id="content">
                 <div class="panel">
@@ -127,11 +127,33 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="col-md-6 col-sm-6 text-right" style="padding-left:10px;">
+                          <h3 style="color:#DDDDDE;"><span class="fa  fa-map-marker"></span> Roswell</h3>
+                          <h1 style="margin-top: -10px;color: #ddd;">30<sup>o</sup></h1>
                         </div>
                         <div class="col-md-6 col-sm-6">
-                            <img src="./img/logo.png" alt="" class="logo-img">
+                           <div class="wheather">
+                            <div class="stormy rainy animated pulse infinite">
+                              <div class="shadow">
+
+                              </div>
+                            </div>
+                            <div class="sub-wheather">
+                              <div class="thunder">
+
+                              </div>
+                              <div class="rain">
+                                  <div class="droplet droplet1"></div>
+                                  <div class="droplet droplet2"></div>
+                                  <div class="droplet droplet3"></div>
+                                  <div class="droplet droplet4"></div>
+                                  <div class="droplet droplet5"></div>
+                                  <div class="droplet droplet6"></div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
                     </div>
-                  </div>                    
+                  </div>
                 </div>
 
                 <div class="col-md-12" style="padding:20px;">
@@ -233,6 +255,7 @@
                                     <div class="panel-heading bg-white border-none">
                                         <h4><span class="icon-notebook icons"></span> Updates</h4>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -265,7 +288,7 @@
       		  </div>
           <!-- end: content -->
 
-    
+
           <!-- start: right menu -->
             <div id="right-menu">
               <ul class="nav nav-tabs">
@@ -320,9 +343,9 @@
 
                 </div>
               </div>
-            </div>  
+            </div>
           <!-- end: right menu -->
-          
+
       </div>
 
       <!-- start: Mobile -->
@@ -332,7 +355,7 @@
                 <ul class="nav nav-list">
                     <li class="active ripple">
                       <a class="tree-toggle nav-header">
-                        <span class="fa-home fa"></span>Dashboard 
+                        <span class="fa-home fa"></span>Dashboard
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
@@ -458,7 +481,7 @@
                     <li><a href="credits.html">Credits</a></li>
                   </ul>
             </div>
-        </div>       
+        </div>
       </div>
       <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
         <span class="fa fa-bars"></span>
@@ -469,8 +492,8 @@
     <script src="asset/js/jquery.min.js"></script>
     <script src="asset/js/jquery.ui.min.js"></script>
     <script src="asset/js/bootstrap.min.js"></script>
-   
-    
+
+
     <!-- plugins -->
     <script src="asset/js/plugins/moment.min.js"></script>
     <script src="asset/js/plugins/fullcalendar.min.js"></script>
@@ -642,6 +665,34 @@
                 ]
             };
 
+         window.onload = function(){
+                var ctx = $(".doughnut-chart")[0].getContext("2d");
+                window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {
+                    responsive : true,
+                    showTooltips: true
+                });
+
+                var ctx2 = $(".line-chart")[0].getContext("2d");
+                window.myLine = new Chart(ctx2).Line(lineChartData, {
+                     responsive: true,
+                        showTooltips: true,
+                        multiTooltipTemplate: "<%= value %>",
+                     maintainAspectRatio: false
+                });
+
+                var ctx3 = $(".bar-chart")[0].getContext("2d");
+                window.myLine = new Chart(ctx3).Bar(barChartData, {
+                     responsive: true,
+                        showTooltips: true
+                });
+
+                var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
+                window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
+                    responsive : true,
+                    showTooltips: true
+                });
+
+            };
 
         //  end:  Chart =============
 
@@ -710,6 +761,44 @@
         });
         // end : Calendar==========
 
+          var createDivUpdates = function (msg, today) {
+              var container = $("<div>");
+              container.attr("class", "panel-body padding-0");
+              var alerting = $("<div>");
+              alerting.attr("class","col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert");
+              var message = $("<p>");
+              message.html(msg);
+              var breakLine = $("<b>");
+              breakLine.html(today);
+              var time = $("<span>");
+              time.attr("class", "icon-clock icons");
+              breakLine.prepend(time);
+              alerting.append(message, breakLine);
+              container.append(alerting);
+              $("#updatingparent").append(container);
+          };
+          // Updating the parents with children information
+          var updateInfo = function () {
+              var newDate = new Date();
+              var message = function (msg, date, time) {
+                  setTimeout(function () {
+                      createDivUpdates(msg, date);
+                  }, time);
+              };
+              message("<strong> Check-In: </strong>" + "Jasmine has checked in to Delta", " " + newDate, 5000);
+              message("<strong> Delta Sky Club: </strong>" + "Jasmine has entered Delta Sky Club", " " + newDate, 15000);
+              message("<strong> Delta Sky Club: </strong>" + "Jasmine has exited Delta Sky Club", " " + newDate, 20000);
+              message("<strong> Terminal A Gate 2 : </strong>" + "Flight 1775MH is boarding", " " + newDate, 30000);
+              message("<strong> Terminal A Gate 2: </strong>" + "Flight 1775MH has taken off for NYC", " " + newDate, 40000);
+              message("<strong> Terminal D Gate 5: </strong>" + "Flight 1175MH has landed at LaGuardia", " " + newDate, 50000);
+              message("<strong> Baggage: </strong>" + "Bags belonging to Jasmine McCoy have arrived at LGA", " " + newDate, 60000);
+              message("<strong> Pick-Up: </strong>" + "Linda Mills --Grandmother has received Jasmine M.", " " + newDate, 700000);
+//            setTimeout(function () {
+//                createDivUpdates(" Your child has made it to the Boarding Zone", " " + newDate);
+//            }, 15000);
+          };
+          updateInfo();
+
         // start: Maps============
 
           jQuery('.maps').vectorMap({
@@ -726,56 +815,6 @@
         });
 
         // end: Maps==============
-        var createDivUpdates = function (msg, today) {
-            var container = $("<div>");
-                container.attr("class", "panel-body padding-0");
-                var alerting = $("<div>");
-                    alerting.attr("class","col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert");
-                    var message = $("<p>");
-                        message.html(msg);
-
-                    var breakLine = $("<b>");
-                        breakLine.html(today);
-
-                    var time = $("<span>");
-                        time.attr("class", "icon-clock icons");
-
-                    breakLine.prepend(time);
-                    alerting.append(message, breakLine);
-                    container.append(alerting);
-
-            $("#updatingparent").append(container);
-        };
-
-
-        // Updating the parents with children information
-        var updateInfo = function () {
-            var newDate = new Date();
-
-            var message = function (msg, date, time) {
-                setTimeout(function () {
-                    createDivUpdates(msg, date);
-
-                }, time);
-            };
-
-            message("<strong> Check-In: </strong>" + "Jasmine has checked in to Delta", " " + newDate, 5000);
-            message("<strong> Delta Sky Club: </strong>" + "Jasmine has entered Delta Sky Club", " " + newDate, 15000);
-            message("<strong> Delta Sky Club: </strong>" + "Jasmine has exited Delta Sky Club", " " + newDate, 20000);
-            message("<strong> Terminal A Gate 2 : </strong>" + "Flight 1775MH is boarding", " " + newDate, 30000);
-            message("<strong> Terminal A Gate 2: </strong>" + "Flight 1775MH has taken off for NYC", " " + newDate, 40000);
-            message("<strong> Terminal D Gate 5: </strong>" + "Flight 1175MH has landed at LaGuardia", " " + newDate, 50000);
-            message("<strong> Baggage: </strong>" + "Bags belonging to Jasmine McCoy have arrived at LGA", " " + newDate, 60000);
-            message("<strong> Pick-Up: </strong>" + "Linda Mills --Grandmother has received Jasmine M.", " " + newDate, 700000);
-
-
-//            setTimeout(function () {
-//                createDivUpdates(" Your child has made it to the Boarding Zone", " " + newDate);
-//            }, 15000);
-
-        };
-
-          updateInfo();
 
       })(jQuery);
      </script>
